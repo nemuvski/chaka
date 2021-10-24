@@ -7,7 +7,7 @@ async function run() {
   const program = new Command();
   program
     .requiredOption('-n, --name <project-name>', 'project name');
-  program.parse(process.argv)
+  program.parse(process.argv);
 
   await main(process.cwd(), program.opts());
 }
