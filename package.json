@@ -4,6 +4,10 @@
   "author": "K.Utsunomiya",
   "license": "MIT",
   "description": "Building a project for a React.js application",
+  "keywords": [
+    "cli",
+    "create-project"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/nemuvski/chaka.git"
@@ -17,12 +21,19 @@
   "bin": {
     "chaka": "bin/index.js"
   },
+  "files": [
+    "bin/",
+    "scripts/"
+  ],
   "scripts": {
-    "drive": "yarn link",
+    "fire": "yarn link",
     "drive:off": "yarn unlink"
   },
   "dependencies": {
     "chalk": "^4.1.2",
-    "commander": "^8.3.0"
+    "commander": "^8.3.0",
+    "execa": "^5.1.1",
+    "listr": "^0.14.3",
+    "rimraf": "^3.0.2"
   }
 }
