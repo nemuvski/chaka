@@ -6,7 +6,8 @@
   "description": "Building a project for a React.js application",
   "keywords": [
     "cli",
-    "create-project"
+    "create-project",
+    "react"
   ],
   "repository": {
     "type": "git",
