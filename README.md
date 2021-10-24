@@ -6,13 +6,26 @@ The project template makes use of [nemuvski/reactjs-boilerplate](https://github.
 
 This is just for personal use. 😉
 
+## Quick Overview
+
+```bash
+npx chaka -n my-reactjs-project
+cd my-reactjs-project
+
+# Do the following as needed.
+yarn install
+git init
+```
+
 ## Requirements
 
 - `Node.js`
   - `>= 14`
 - `git`
 
-## Usage
+## Command Usage
+
+It's simple.
 
 ```bash
 chaka -n my-reactjs-project
