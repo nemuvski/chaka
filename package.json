@@ -1,0 +1,23 @@
+{
+  "name": "chaka",
+  "version": "0.0.1",
+  "author": "K.Utsunomiya",
+  "license": "MIT",
+  "description": "Building a project for a React.js application",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nemuvski/chaka.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nemuvski/chaka/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "bin": {
+    "chaka": "bin/chaka.js"
+  },
+  "dependencies": {
+    "commander": "^8.3.0"
+  }
+}
