@@ -15,9 +15,14 @@
     "node": ">=14.0.0"
   },
   "bin": {
-    "chaka": "bin/chaka.js"
+    "chaka": "bin/index.js"
+  },
+  "scripts": {
+    "drive": "yarn link",
+    "drive:off": "yarn unlink"
   },
   "dependencies": {
+    "chalk": "^4.1.2",
     "commander": "^8.3.0"
   }
 }
