@@ -9,8 +9,8 @@ This is just for personal use. 😉
 ## Quick Overview
 
 ```bash
-npx chaka -n my-reactjs-project
-cd my-reactjs-project
+npx chaka my-app
+cd my-app
 
 # Do the following as needed.
 yarn install
@@ -27,12 +27,32 @@ git init
 
 ## Command Usage
 
-It's simple.
+It's simple. 🍰
 
 ```bash
-chaka -n my-reactjs-project
+chaka [options] <project-name>
 ```
 
-| option | description |
-| --- | --- |
-| `-n`<br />`--name` | project name (Required option) |
+The following are examples of usage.
+
+```bash
+chaka my-app
+chaka -t vite my-app
+chaka -t webpack my-app
+```
+
+### Arguments
+
+- `<project-name>`
+  - i.e. directory name
+
+### Options
+
+- `-t`, `--tool`
+  - tool name
+  - choices: **vite**, **webpack**
+  - default: **vite**
+- `-v`, `--version`
+  - output the version number
+- `-h`, `--help`
+  - display help for command
