@@ -1,11 +1,10 @@
 const execa = require('execa');
+const { TEMPLATE_REPOSITORY } = require('./constants')
 
-const templateRepository = 'https://github.com/nemuvski/reactjs-boilerplate.git';
-
-async function cloneTemplate(projectName) {
-  const result = await execa('git', ['clone', templateRepository, projectName]);
+async function cloneTemplate(projectName, branchName) {
+  const result = await execa('git', ['clone', '-b', branchName, TEMPLATE_REPOSITORY, projectName]);
   if (result.failed) {
-    return Promise.reject(new Error('Failed to clone template'));
+    return Promise.reject(new Error('Failed to fetch template'));
   }
 }
 

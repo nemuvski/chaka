@@ -4,11 +4,11 @@ const listr = require('listr');
 const { cloneTemplate } = require('./git');
 const { isExist, remove, changePackageJson } = require('./resource');
 
-async function main(cwd, opts) {
-  const { name } = opts;
-  const targetProjectPath = path.join(cwd, name);
+async function main(cwd, dirName, opts) {
+  const targetProjectPath = path.join(cwd, dirName);
+  const { tool } = opts;
 
-  console.info('Project Name:', chalk.green(name));
+  console.info('Project Name:', chalk.green(dirName));
 
   if (isExist(targetProjectPath)) {
     console.error(chalk.bgRed(targetProjectPath), chalk.red('is already exists'));
@@ -17,11 +17,11 @@ async function main(cwd, opts) {
 
   const tasks = new listr([
     {
-      title: 'Clone template',
-      task: () => cloneTemplate(name),
+      title: 'Fetching a template',
+      task: () => cloneTemplate(dirName, tool),
     },
     {
-      title: 'Initialize project',
+      title: 'Initialize a project',
       task: () => {
         return new listr([
           {
@@ -30,7 +30,7 @@ async function main(cwd, opts) {
           },
           {
             title: 'Rewrite package.json',
-            task: () => changePackageJson(targetProjectPath, name),
+            task: () => changePackageJson(targetProjectPath, dirName),
           },
         ]);
       },
