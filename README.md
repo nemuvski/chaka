@@ -20,7 +20,9 @@ git init
 ## Requirements
 
 - `Node.js`
-  - `>= 14`
+  - `>= 16.0`
+- `npm`
+  - `>= 7.10`
 - `git`
 
 ## Command Usage
