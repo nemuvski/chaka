@@ -14,25 +14,65 @@
     "type": "git",
     "url": "https://github.com/nemuvski/chaka.git"
   },
+  "files": [
+    "/bin",
+    "/dist",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
   "bugs": {
     "url": "https://github.com/nemuvski/chaka/issues"
   },
   "engines": {
-    "node": ">=16.0.0",
-    "npm": ">=7.0.0"
+    "node": ">=16.0.0"
   },
+  "main": "dist/index.js",
   "bin": {
     "chaka": "bin/index.js"
   },
-  "files": [
-    "bin/",
-    "scripts/"
-  ],
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "format": "prettier --write './**/*.{js,ts}'",
+    "lint": "eslint . --ext .ts",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "posttest": "yarn lint",
+    "prepack": "yarn build && oclif manifest && oclif readme",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif readme && git add README.md"
+  },
   "dependencies": {
-    "chalk": "^4.1.2",
-    "commander": "^8.3.0",
-    "execa": "^5.1.1",
-    "listr": "^0.14.3",
-    "rimraf": "^3.0.2"
+    "@oclif/core": "^1.1.2",
+    "@oclif/plugin-help": "^5.1.10",
+    "@oclif/plugin-plugins": "^2.0.12"
+  },
+  "devDependencies": {
+    "@oclif/test": "^2",
+    "@types/chai": "^4",
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^16.9.4",
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "eslint-config-oclif": "^4.0.0",
+    "eslint-config-oclif-typescript": "^1.0.2",
+    "eslint-config-prettier": "^8.3.0",
+    "globby": "^11.1.0",
+    "mocha": "^9.1.4",
+    "oclif": "^2.3.0",
+    "prettier": "^2.5.1",
+    "shx": "^0.3.3",
+    "ts-node": "^10.4.0",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.5"
+  },
+  "oclif": {
+    "bin": "chaka",
+    "dirname": "chaka",
+    "commands": "./dist/commands",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins"
+    ],
+    "topicSeparator": " ",
+    "topics": {}
   }
 }
