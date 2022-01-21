@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "author": "K.Utsunomiya",
   "license": "MIT",
-  "description": "Building a project for a React.js application",
+  "description": "Creating a React.js or Next.js project template",
   "keywords": [
     "cli",
     "create-project",
-    "react"
+    "react.js",
+    "next.js"
   ],
   "repository": {
     "type": "git",
@@ -18,7 +19,7 @@
   },
   "engines": {
     "node": ">=16.0.0",
-    "npm": ">=7.10.0"
+    "npm": ">=7.0.0"
   },
   "bin": {
     "chaka": "bin/index.js"

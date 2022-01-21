@@ -1,12 +1,12 @@
 const path = require('path');
 const chalk = require('chalk');
 const listr = require('listr');
-const { cloneTemplate } = require('./git');
-const { isExist, remove, changePackageJson } = require('./resource');
+const { cloneTemplate } = require('./utils/git');
+const { isExist, remove, changePackageJson } = require('./utils/resource');
 
 async function main(cwd, dirName, opts) {
   const targetProjectPath = path.join(cwd, dirName);
-  const { tool } = opts;
+  const { tool, lib } = opts;
 
   console.info('Project Name:', chalk.green(dirName));
 
@@ -18,7 +18,7 @@ async function main(cwd, dirName, opts) {
   const tasks = new listr([
     {
       title: 'Fetching a template',
-      task: () => cloneTemplate(dirName, tool),
+      task: () => cloneTemplate(dirName, tool, lib),
     },
     {
       title: 'Initialize a project',

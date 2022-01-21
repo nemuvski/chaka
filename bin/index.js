@@ -3,7 +3,7 @@
 const { Command, Option } = require('commander');
 const packageJson = require('../package.json');
 const main = require('../scripts/main');
-const { BRANCH_LIST, DEFAULT_BRANCH } = require('../scripts/constants');
+const { CLI } = require('../scripts/constants');
 
 async function run() {
   const program = new Command();
@@ -11,7 +11,10 @@ async function run() {
     .version(packageJson.version, '-v, --version')
     .argument('<project-name>', 'project name (i.e. directory name)')
     .addOption(
-      new Option('-t, --tool <tool-name>', 'tool name').choices(BRANCH_LIST).default(DEFAULT_BRANCH)
+      new Option('-l, --lib <lib-name>', 'lib name').choices(CLI.LIB.CHOICES).default(CLI.LIB.DEFAULT)
+    )
+    .addOption(
+      new Option('-t, --tool <tool-name>', 'tool name').choices(CLI.TOOL.CHOICES).default(CLI.TOOL.DEFAULT)
     );
   program.parse(process.argv);
 
