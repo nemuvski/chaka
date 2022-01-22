@@ -71,6 +71,13 @@
       "@oclif/plugin-help"
     ],
     "topicSeparator": " ",
-    "topics": {}
+    "topics": {
+      "react": {
+        "description": "Create a React.js project template"
+      },
+      "next": {
+        "description": "Create a Next.js project template"
+      }
+    }
   }
 }
