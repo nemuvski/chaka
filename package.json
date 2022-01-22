@@ -42,8 +42,7 @@
   },
   "dependencies": {
     "@oclif/core": "^1.1.2",
-    "@oclif/plugin-help": "^5.1.10",
-    "@oclif/plugin-plugins": "^2.0.12"
+    "@oclif/plugin-help": "^5.1.10"
   },
   "devDependencies": {
     "@oclif/test": "^2",
@@ -69,8 +68,7 @@
     "dirname": "chaka",
     "commands": "./dist/commands",
     "plugins": [
-      "@oclif/plugin-help",
-      "@oclif/plugin-plugins"
+      "@oclif/plugin-help"
     ],
     "topicSeparator": " ",
     "topics": {}
