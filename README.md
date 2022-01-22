@@ -15,8 +15,8 @@ If you have any problems about the template, please create an issue in the repos
 ### Case: *React.js*
 
 ```bash
-npx chaka my-react-app
-cd my-react-app
+npx chaka react my-app
+cd my-app
 
 yarn install
 git init
@@ -25,12 +25,13 @@ git init
 ### Case: *Next.js*
 
 ```bash
-npx chaka -l next my-next-app
-cd my-next-app
+npx chaka next my-app
+cd my-app
 
 yarn install
 git init
 ```
+
 
 ## Requirements
 
@@ -41,39 +42,38 @@ git init
 - `git`
 
 
-## Command Usage
+## Usage
 
 It's simple. 🍰
 
-```bash
-chaka [options] <project-name>
+```
+chaka [COMMAND]
+
+[COMMAND]
+  help   Display help for chaka.
+  next   Create a Next.js project template
+  react  Create a React.js project template
 ```
 
-The following are examples of usage.
+### COMMAND: `next`
 
-```bash
-chaka my-app
-chaka -t vite my-app
-chaka -t webpack my-app
+```
+chaka next [PROJECT]
 ```
 
-### Arguments
+- `[PROJECT]`
+  - project name (i.e. directory name)
 
-- `<project-name>`
-  - i.e. directory name
+### COMMAND: `react`
 
-### Options
+```
+chaka react [PROJECT] [-t vite|webpack]
+```
 
-- `-l`, `--lib`
-  - lib name
-  - choices: **react**, **next**
-  - default: **react**
-- `-t`, `--tool`
-  - tool name
-  - choices: **vite**, **webpack**
-  - default: **vite**
-  - ⚠️ If `lib` option set **next**, `tool` option is ignored.
-- `-v`, `--version`
-  - output the version number
-- `-h`, `--help`
-  - display help for command
+- `[PROJECT]`
+  - project name (i.e. directory name)
+- `[-t vite|webpack]`
+  - build tool name
+  - options: `vite|webpack`
+  - default: `vite`
+  
