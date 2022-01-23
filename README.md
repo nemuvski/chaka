@@ -39,7 +39,6 @@ git init
   - `>= 16.0` *recommended version*
 - `npm`
   - `>= 7.0` *recommended version*
-- `git`
 
 
 ## Usage
