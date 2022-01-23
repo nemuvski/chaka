@@ -1,4 +1,7 @@
+import * as tmp from 'tmp-promise'
 import { Command, Interfaces } from '@oclif/core'
+import { existsSync } from '../utils/fs'
+import { NextTemplateGenerator } from '../generator'
 
 /**
  * nextコマンドの処理を定義する
@@ -16,7 +19,28 @@ export default class Next extends Command {
     },
   ]
 
-  async run(): Promise<void> {
-    const { args } = await this.parse(Next)
+  async run() {
+    const {
+      args: { project },
+    } = await this.parse(Next)
+
+    const tmpDir = await tmp.dir()
+    const generator = new NextTemplateGenerator({
+      tmpDir,
+      project,
+    })
+
+    if (existsSync(generator.getProjectPath())) {
+      this.error(`${generator.getProjectPath()} is already exists`)
+    }
+
+    try {
+      await generator.run()
+    } catch (error) {
+      await generator.errorProcess()
+      this.error(error as Error)
+    } finally {
+      await generator.postProcess()
+    }
   }
 }

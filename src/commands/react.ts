@@ -1,5 +1,7 @@
+import * as tmp from 'tmp-promise'
 import { Command, Flags, Interfaces } from '@oclif/core'
-import { ReactCommand } from '../constant'
+import { existsSync } from '../utils/fs'
+import { ReactTemplateGenerator } from '../generator'
 
 /**
  * reactコマンドの処理を定義する
@@ -13,8 +15,8 @@ export default class React extends Command {
     tool: Flags.string({
       char: 't',
       description: 'build tool name',
-      options: ReactCommand.options.tool.choices,
-      default: ReactCommand.options.tool.default,
+      options: ['vite', 'webpack'],
+      default: 'vite',
       multiple: false,
       required: false,
     }),
@@ -28,7 +30,31 @@ export default class React extends Command {
     },
   ]
 
-  async run(): Promise<void> {
-    const { args, flags } = await this.parse(React)
+  async run() {
+    const {
+      args: { project },
+      flags: { tool },
+    } = await this.parse(React)
+
+    const tmpDir = await tmp.dir()
+
+    const generator = new ReactTemplateGenerator({
+      tmpDir,
+      project,
+      repositoryBranch: tool,
+    })
+
+    if (existsSync(generator.getProjectPath())) {
+      this.error(`${generator.getProjectPath()} is already exists`)
+    }
+
+    try {
+      await generator.run()
+    } catch (error) {
+      await generator.errorProcess()
+      this.error(error as Error)
+    } finally {
+      await generator.postProcess()
+    }
   }
 }

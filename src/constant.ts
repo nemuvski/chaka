@@ -1,11 +1,8 @@
 /**
- * reactコマンド関連の定数
+ * ファイル関連の定数
  */
-export const ReactCommand = {
-  options: {
-    tool: {
-      choices: ['vite', 'webpack'],
-      default: 'vite',
-    },
-  },
+export const File = {
+  zipName: 'download',
+  zipExtension: '.zip',
+  copyExcludedFiles: ['yarn.lock', 'package-lock.json'],
 }
