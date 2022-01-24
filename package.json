@@ -31,14 +31,12 @@
     "chaka": "bin/index.js"
   },
   "scripts": {
-    "build": "shx rm -rf dist && tsc -b",
     "format": "prettier --write './**/*.{js,ts}'",
     "lint": "eslint . --ext .ts",
-    "postpack": "shx rm -f oclif.manifest.json",
-    "posttest": "yarn lint",
-    "prepack": "yarn build && oclif manifest && oclif readme",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif readme && git add README.md"
+    "build": "shx rm -rf dist && tsc -b",
+    "prepack": "yarn build && oclif manifest",
+    "postpack": "shx rm -f oclif.manifest.json"
   },
   "dependencies": {
     "@oclif/core": "^1.1.2",
