@@ -19,7 +19,7 @@ export default class Next extends Command {
     },
   ]
 
-  async run() {
+  async run(): Promise<void> {
     const {
       args: { project },
     } = await this.parse(Next)

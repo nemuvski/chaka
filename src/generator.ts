@@ -1,4 +1,4 @@
-import * as path from 'path'
+import * as path from 'node:path'
 import * as tmp from 'tmp-promise'
 import AdmZip from 'adm-zip'
 import { cli } from 'cli-ux'
@@ -30,7 +30,7 @@ interface GeneratorConstructorArgs {
 /**
  * TemplateGeneratorのbuildメソッドの引数
  */
-interface GeneratorBuildArgs extends Omit<GeneratorConstructorArgs, 'tmpDir'> {}
+type GeneratorBuildArgs = Omit<GeneratorConstructorArgs, 'tmpDir'>
 
 /**
  * TemplateGeneratorの基底クラス
@@ -54,7 +54,8 @@ abstract class TemplateGenerator {
   /**
    * TemplateGeneratorのインスタンスを生成し、返却する
    *
-   * @returns {Promise<TemplateGenerator>} TemplateGeneratorのインスタンス
+   * @param args generatorの作成に必要な引数
+   * @returns Promise<T> TemplateGeneratorのインスタンス
    */
   static async build<T = TemplateGenerator>(
     this: { new (args: GeneratorConstructorArgs): T },
@@ -66,6 +67,8 @@ abstract class TemplateGenerator {
 
   /**
    * プロジェクトテンプレートのダウンロードと初期化
+   *
+   * @returns Promise<void>
    */
   async run() {
     cli.action.start('Download template')
@@ -83,7 +86,7 @@ abstract class TemplateGenerator {
   /**
    * プロジェクトテンプレートの配置先（プロジェクトディレクトリ）のパスを返却する
    *
-   * @returns {string} プロジェクトテンプレートの配置先のパス
+   * @returns string プロジェクトテンプレートの配置先のパス
    */
   getProjectPath(): string {
     return path.join(process.cwd(), this.project)
@@ -91,19 +94,25 @@ abstract class TemplateGenerator {
 
   /**
    * 一時ファイルの削除
+   *
+   * @returns Promise<void>
    */
   async postProcess() {
     if (existsSync(this.getTempZipFilePath())) {
       await rm(this.getTempZipFilePath())
     }
+
     if (existsSync(this.getUnzippedDirectoryPath())) {
       await rm(this.getUnzippedDirectoryPath(), { recursive: true, force: true })
     }
+
     await this.tmpDir.cleanup()
   }
 
   /**
    * エラー時の処理
+   *
+   * @returns Promise<void>
    */
   async errorProcess() {
     if (existsSync(this.getProjectPath())) {
@@ -114,6 +123,7 @@ abstract class TemplateGenerator {
   /**
    * コマンド終了時に簡単な案内を出力する
    *
+   * @returns void
    * @protected
    */
   protected sayFarewell() {
@@ -138,7 +148,7 @@ abstract class TemplateGenerator {
   /**
    * プロジェクトディレクトリ中のpackage.jsonのパスを返却する
    *
-   * @returns {string} package.jsonのパス
+   * @returns string package.jsonのパス
    * @protected
    */
   protected getPackageJsonPath(): string {
@@ -148,7 +158,7 @@ abstract class TemplateGenerator {
   /**
    * zip解凍した時に生成されるディレクトリのパスを返却する
    *
-   * @returns {string} zip解凍した時に生成されるディレクトリのパス
+   * @returns string zip解凍した時に生成されるディレクトリのパス
    * @protected
    */
   protected getUnzippedDirectoryPath(): string {
@@ -158,7 +168,7 @@ abstract class TemplateGenerator {
   /**
    * 一時保存したzipファイルのパスを返却する
    *
-   * @returns {string} 一時保存したzipファイルのパス
+   * @returns string 一時保存したzipファイルのパス
    * @protected
    */
   protected getTempZipFilePath(): string {
@@ -168,6 +178,7 @@ abstract class TemplateGenerator {
   /**
    * プロジェクトテンプレートのzipファイルをダウンロードし、一時ディレクトリに保存する
    *
+   * @returns Promise<void>
    * @protected
    */
   protected async downloadTemplate() {
@@ -184,6 +195,7 @@ abstract class TemplateGenerator {
   /**
    * プロジェクトテンプレートのzipファイルを解凍し、プロジェクトディレクトにコピーする
    *
+   * @returns Promise<void>
    * @protected
    */
   protected async extractZipFrom() {
@@ -193,13 +205,13 @@ abstract class TemplateGenerator {
     // コピー前にプロジェクトディレクトリを生成する（パーミッションは755とする）
     await mkdir(this.getProjectPath(), { mode: 0o755 })
 
-    const copyExcludedFilePaths = File.copyExcludedFiles.map((filename) =>
-      path.join(this.getUnzippedDirectoryPath(), filename)
+    const copyExcludedFilePaths = new Set(
+      File.copyExcludedFiles.map((filename) => path.join(this.getUnzippedDirectoryPath(), filename))
     )
     await copy(this.getUnzippedDirectoryPath(), this.getProjectPath(), {
       recursive: true,
       overwrite: false,
-      filter: (src) => !copyExcludedFilePaths.includes(src),
+      filter: (src) => !copyExcludedFilePaths.has(src),
     })
   }
 
@@ -207,6 +219,7 @@ abstract class TemplateGenerator {
    * プロジェクトディレクトリ中のpackage.jsonの書き換え
    *
    * @param encoding エンコード
+   * @returns Promise<void>
    * @protected
    */
   protected async changePackageJson(encoding: BufferEncoding = 'utf8') {
@@ -217,7 +230,7 @@ abstract class TemplateGenerator {
     // 以下、プロパティの書き換え
     jsonData.name = this.project
 
-    await writeFile(packageJsonPath, jsonStringify(jsonData), { encoding })
+    await writeFile(packageJsonPath, jsonStringify<PackageJson>(jsonData), { encoding })
   }
 }
 

@@ -13,8 +13,8 @@ export function jsonParse<T>(data: string): T {
  *
  * @param data 変換するオブジェクト
  * @param space 挿入するスペース数
- * @returns {string} 変換後の文字列
+ * @returns string 変換後の文字列
  */
-export function jsonStringify(data: any, space = 2): string {
+export function jsonStringify<T>(data: T, space = 2): string {
   return JSON.stringify(data, null, space)
 }

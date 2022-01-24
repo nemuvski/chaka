@@ -30,7 +30,7 @@ export default class React extends Command {
     },
   ]
 
-  async run() {
+  async run(): Promise<void> {
     const {
       args: { project },
       flags: { tool },
