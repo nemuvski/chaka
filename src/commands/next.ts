@@ -1,4 +1,3 @@
-import * as tmp from 'tmp-promise'
 import { Command, Interfaces } from '@oclif/core'
 import { existsSync } from '../utils/fs'
 import { decoRed } from '../utils/log-decoration'
@@ -25,9 +24,7 @@ export default class Next extends Command {
       args: { project },
     } = await this.parse(Next)
 
-    const tmpDir = await tmp.dir()
-    const generator = new NextTemplateGenerator({
-      tmpDir,
+    const generator = await NextTemplateGenerator.build({
       project,
     })
 

@@ -1,4 +1,5 @@
 import * as path from 'path'
+import * as tmp from 'tmp-promise'
 import AdmZip from 'adm-zip'
 import { cli } from 'cli-ux'
 import { DirectoryResult } from 'tmp-promise'
@@ -27,6 +28,11 @@ interface GeneratorConstructorArgs {
 }
 
 /**
+ * TemplateGeneratorのbuildメソッドの引数
+ */
+interface GeneratorBuildArgs extends Omit<GeneratorConstructorArgs, 'tmpDir'> {}
+
+/**
  * TemplateGeneratorの基底クラス
  */
 abstract class TemplateGenerator {
@@ -37,12 +43,25 @@ abstract class TemplateGenerator {
   protected project: string
   protected repositoryBranch: string | undefined = 'main'
 
-  constructor({ project, tmpDir, repositoryBranch }: GeneratorConstructorArgs) {
-    this.project = project
+  constructor({ tmpDir, project, repositoryBranch }: GeneratorConstructorArgs) {
     this.tmpDir = tmpDir
+    this.project = project
     if (repositoryBranch) {
       this.repositoryBranch = repositoryBranch
     }
+  }
+
+  /**
+   * TemplateGeneratorのインスタンスを生成し、返却する
+   *
+   * @returns {Promise<TemplateGenerator>} TemplateGeneratorのインスタンス
+   */
+  static async build<T = TemplateGenerator>(
+    this: { new (args: GeneratorConstructorArgs): T },
+    args: GeneratorBuildArgs
+  ): Promise<T> {
+    const tmpDir = await tmp.dir()
+    return new this({ tmpDir, ...args })
   }
 
   /**

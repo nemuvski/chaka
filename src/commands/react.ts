@@ -1,4 +1,3 @@
-import * as tmp from 'tmp-promise'
 import { Command, Flags, Interfaces } from '@oclif/core'
 import { existsSync } from '../utils/fs'
 import { decoRed } from '../utils/log-decoration'
@@ -37,10 +36,7 @@ export default class React extends Command {
       flags: { tool },
     } = await this.parse(React)
 
-    const tmpDir = await tmp.dir()
-
-    const generator = new ReactTemplateGenerator({
-      tmpDir,
+    const generator = await ReactTemplateGenerator.build({
       project,
       repositoryBranch: tool,
     })
