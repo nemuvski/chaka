@@ -1,5 +1,7 @@
 # Chaka 🔥
 
+[![npm version](https://badge.fury.io/js/chaka.svg)](https://badge.fury.io/js/chaka)
+
 This command provides for creating a *React.js* or *Next.js* project template.
 
 The following boilerplate is used to create a project.
@@ -10,13 +12,13 @@ The following boilerplate is used to create a project.
 If you have any problems about the template, please create an issue in the repository.
 
 
-## Quick Overview
+## 👀 Quick Overview
 
 ### Case: *React.js*
 
 ```bash
-npx chaka my-react-app
-cd my-react-app
+npx chaka react my-app
+cd my-app
 
 yarn install
 git init
@@ -25,55 +27,52 @@ git init
 ### Case: *Next.js*
 
 ```bash
-npx chaka -l next my-next-app
-cd my-next-app
+npx chaka next my-app
+cd my-app
 
 yarn install
 git init
 ```
 
-## Requirements
+
+## 🚩 Requirements
 
 - `Node.js`
   - `>= 16.0` *recommended version*
-- `npm`
-  - `>= 7.0` *recommended version*
-- `git`
 
 
-## Command Usage
+## 📖 Usage
 
 It's simple. 🍰
 
-```bash
-chaka [options] <project-name>
+```
+chaka [COMMAND]
+
+[COMMAND]
+  help   Display help for chaka.
+  next   Create a Next.js project template
+  react  Create a React.js project template
 ```
 
-The following are examples of usage.
+### COMMAND: `next`
 
-```bash
-chaka my-app
-chaka -t vite my-app
-chaka -t webpack my-app
+```
+chaka next [PROJECT]
 ```
 
-### Arguments
+- `[PROJECT]`
+  - project name (i.e. directory name)
 
-- `<project-name>`
-  - i.e. directory name
+### COMMAND: `react`
 
-### Options
+```
+chaka react [PROJECT] [-t vite|webpack]
+```
 
-- `-l`, `--lib`
-  - lib name
-  - choices: **react**, **next**
-  - default: **react**
-- `-t`, `--tool`
-  - tool name
-  - choices: **vite**, **webpack**
-  - default: **vite**
-  - ⚠️ If `lib` option set **next**, `tool` option is ignored.
-- `-v`, `--version`
-  - output the version number
-- `-h`, `--help`
-  - display help for command
+- `[PROJECT]`
+  - project name (i.e. directory name)
+- `[-t vite|webpack]`
+  - build tool name
+  - options: `vite|webpack`
+  - default: `vite`
+  
