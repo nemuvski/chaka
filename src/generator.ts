@@ -1,11 +1,12 @@
 import * as path from 'path'
-import * as AdmZip from 'adm-zip'
+import AdmZip from 'adm-zip'
 import { cli } from 'cli-ux'
 import { DirectoryResult } from 'tmp-promise'
 import { DownloaderHelper } from 'node-downloader-helper'
 import { File } from './constant'
 import { readFile, writeFile, copy, mkdir, existsSync, rm } from './utils/fs'
 import { jsonParse, jsonStringify } from './utils/json'
+import { decorateInfo } from './utils/log-decoration'
 
 /**
  * package.jsonのオブジェクトの型
@@ -48,11 +49,11 @@ abstract class TemplateGenerator {
    * プロジェクトテンプレートのダウンロードと初期化
    */
   async run() {
-    cli.action.start('Download template')
+    cli.action.start(decorateInfo('Download template'))
     await this.downloadTemplate()
     cli.action.stop('done')
 
-    cli.action.start('Initialize project')
+    cli.action.start(decorateInfo('Initialize project'))
     await this.extractZipFrom()
     await this.changePackageJson()
     cli.action.stop('done')
