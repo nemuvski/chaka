@@ -28,7 +28,7 @@
   },
   "main": "dist/index.js",
   "bin": {
-    "chaka": "bin/index.js"
+    "chaka": "bin/run"
   },
   "scripts": {
     "format": "prettier --write './**/*.{js,ts}'",
