@@ -1,5 +1,7 @@
 # Chaka 🔥
 
+[![npm version](https://badge.fury.io/js/chaka.svg)](https://badge.fury.io/js/chaka)
+
 This command provides for creating a *React.js* or *Next.js* project template.
 
 The following boilerplate is used to create a project.
@@ -10,7 +12,7 @@ The following boilerplate is used to create a project.
 If you have any problems about the template, please create an issue in the repository.
 
 
-## Quick Overview
+## 👀 Quick Overview
 
 ### Case: *React.js*
 
@@ -33,15 +35,13 @@ git init
 ```
 
 
-## Requirements
+## 🚩 Requirements
 
 - `Node.js`
   - `>= 16.0` *recommended version*
-- `npm`
-  - `>= 7.0` *recommended version*
 
 
-## Usage
+## 📖 Usage
 
 It's simple. 🍰
 
