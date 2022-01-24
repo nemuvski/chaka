@@ -6,7 +6,7 @@ import { DownloaderHelper } from 'node-downloader-helper'
 import { File } from './constant'
 import { readFile, writeFile, copy, mkdir, existsSync, rm } from './utils/fs'
 import { jsonParse, jsonStringify } from './utils/json'
-import { decorateInfo } from './utils/log-decoration'
+import { decoBlue, decoGreen, decoUnderscore } from './utils/log-decoration'
 
 /**
  * package.jsonのオブジェクトの型
@@ -49,14 +49,16 @@ abstract class TemplateGenerator {
    * プロジェクトテンプレートのダウンロードと初期化
    */
   async run() {
-    cli.action.start(decorateInfo('Download template'))
+    cli.action.start('Download template')
     await this.downloadTemplate()
-    cli.action.stop('done')
+    cli.action.stop(decoGreen('done'))
 
-    cli.action.start(decorateInfo('Initialize project'))
+    cli.action.start('Initialize project')
     await this.extractZipFrom()
     await this.changePackageJson()
-    cli.action.stop('done')
+    cli.action.stop(decoGreen('done'))
+
+    this.sayFarewell()
   }
 
   /**
@@ -88,6 +90,30 @@ abstract class TemplateGenerator {
     if (existsSync(this.getProjectPath())) {
       await rm(this.getProjectPath(), { recursive: true, force: true })
     }
+  }
+
+  /**
+   * コマンド終了時に簡単な案内を出力する
+   *
+   * @protected
+   */
+  protected sayFarewell() {
+    cli.log()
+    cli.log(`Created project in ${decoGreen(this.getProjectPath())}`)
+    cli.log()
+    cli.log('Now run:')
+    cli.log()
+    cli.log(`    cd ${decoBlue(this.project)}`)
+    cli.log()
+    cli.log()
+    cli.log(`  ${decoUnderscore('Install dependencies using your fav package manager')}`)
+    cli.log()
+    cli.log('    yarn install')
+    cli.log('    npm install')
+    cli.log()
+    cli.log()
+    cli.log('Have fun coding 🔥')
+    cli.log()
   }
 
   /**

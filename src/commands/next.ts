@@ -1,6 +1,7 @@
 import * as tmp from 'tmp-promise'
 import { Command, Interfaces } from '@oclif/core'
 import { existsSync } from '../utils/fs'
+import { decoRed } from '../utils/log-decoration'
 import { NextTemplateGenerator } from '../generator'
 
 /**
@@ -31,14 +32,14 @@ export default class Next extends Command {
     })
 
     if (existsSync(generator.getProjectPath())) {
-      this.error(`${generator.getProjectPath()} is already exists`)
+      this.error(`${decoRed(generator.getProjectPath())} is already exists`)
     }
 
     try {
       await generator.run()
     } catch (error) {
       await generator.errorProcess()
-      this.error(error as Error)
+      this.error(decoRed(error as Error))
     } finally {
       await generator.postProcess()
     }
