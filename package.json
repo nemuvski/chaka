@@ -44,7 +44,7 @@
     "@oclif/plugin-help": "^5.1.10",
     "adm-zip": "^0.5.9",
     "cli-ux": "^6.0.8",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^10.1.0",
     "node-downloader-helper": "^1.0.19",
     "tmp-promise": "^3.0.3"
   },
