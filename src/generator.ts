@@ -1,10 +1,10 @@
 import * as path from 'node:path'
 import * as tmp from 'tmp-promise'
 import AdmZip from 'adm-zip'
-import { cli } from 'cli-ux'
 import { DirectoryResult } from 'tmp-promise'
 import { DownloaderHelper } from 'node-downloader-helper'
 import { File } from './constant'
+import cliUx from './utils/cli-ux'
 import { readFile, writeFile, copy, mkdir, existsSync, rm } from './utils/fs'
 import { jsonParse, jsonStringify } from './utils/json'
 import { decoBlue, decoGreen, decoUnderscore } from './utils/log-decoration'
@@ -71,14 +71,14 @@ abstract class TemplateGenerator {
    * @returns Promise<void>
    */
   async run() {
-    cli.action.start('Download template')
+    cliUx.action.start('Download template')
     await this.downloadTemplate()
-    cli.action.stop(decoGreen('done'))
+    cliUx.action.stop(decoGreen('done'))
 
-    cli.action.start('Initialize project')
+    cliUx.action.start('Initialize project')
     await this.extractZipFrom()
     await this.changePackageJson()
-    cli.action.stop(decoGreen('done'))
+    cliUx.action.stop(decoGreen('done'))
 
     this.sayFarewell()
   }
@@ -127,22 +127,22 @@ abstract class TemplateGenerator {
    * @protected
    */
   protected sayFarewell() {
-    cli.log()
-    cli.log(`Created project in ${decoGreen(this.getProjectPath())}`)
-    cli.log()
-    cli.log('Now run:')
-    cli.log()
-    cli.log(`    cd ${decoBlue(this.project)}`)
-    cli.log()
-    cli.log()
-    cli.log(`  ${decoUnderscore('Install dependencies using your fav package manager')}`)
-    cli.log()
-    cli.log('    yarn install')
-    cli.log('    npm install')
-    cli.log()
-    cli.log()
-    cli.log('Have fun coding 🔥')
-    cli.log()
+    cliUx.log()
+    cliUx.log(`Created project in ${decoGreen(this.getProjectPath())}`)
+    cliUx.log()
+    cliUx.log('Now run:')
+    cliUx.log()
+    cliUx.log(`    cd ${decoBlue(this.project)}`)
+    cliUx.log()
+    cliUx.log()
+    cliUx.log(`  ${decoUnderscore('Install dependencies using your fav package manager')}`)
+    cliUx.log()
+    cliUx.log('    yarn install')
+    cliUx.log('    npm install')
+    cliUx.log()
+    cliUx.log()
+    cliUx.log('Have fun coding 🔥')
+    cliUx.log()
   }
 
   /**
