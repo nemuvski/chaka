@@ -1,5 +1,3 @@
-# Chaka 🔥
-
 [![npm](https://img.shields.io/badge/chaka-555?style=flat-square&logo=npm)](https://www.npmjs.com/package/chaka)
 ![npm](https://img.shields.io/npm/v/chaka?style=flat-square)
 
