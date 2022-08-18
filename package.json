@@ -10,9 +10,13 @@
     "react.js",
     "next.js"
   ],
+  "homepage": "https://chakafire.netlify.app/",
   "repository": {
     "type": "git",
     "url": "https://github.com/nemuvski/chaka.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nemuvski/chaka/issues"
   },
   "files": [
     "/bin",
@@ -20,9 +24,6 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "bugs": {
-    "url": "https://github.com/nemuvski/chaka/issues"
-  },
   "engines": {
     "node": ">=16.0.0"
   },

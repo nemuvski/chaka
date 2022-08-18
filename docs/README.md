@@ -1,6 +1,3 @@
-[![npm](https://img.shields.io/badge/chaka-555?style=flat-square&logo=npm)](https://www.npmjs.com/package/chaka)
-![npm](https://img.shields.io/npm/v/chaka?style=flat-square)
-
 This command provides for creating a *React.js* or *Next.js* project template.
 
 The following boilerplate is used to create a project.
@@ -11,9 +8,9 @@ The following boilerplate is used to create a project.
 If you have any problems about the template, please create an issue in the repository.
 
 
-## 👀 Quick Overview
+## Quick Overview
 
-### Case: *React.js*
+### Case: React.js
 
 ```bash
 npx chaka react my-app
@@ -23,7 +20,7 @@ yarn install
 git init
 ```
 
-### Case: *Next.js*
+### Case: Next.js
 
 ```bash
 npx chaka next my-app
@@ -34,13 +31,13 @@ git init
 ```
 
 
-## 🚩 Requirements
+## Requirements
 
 - `Node.js`
   - `>= 16.0` *recommended version*
 
 
-## 📖 Usage
+## Usage
 
 It's simple. 🍰
 
@@ -53,7 +50,7 @@ chaka [COMMAND]
   react  Create a React.js project template
 ```
 
-### COMMAND: `next`
+### Command: next
 
 ```
 chaka next [PROJECT]
@@ -62,7 +59,7 @@ chaka next [PROJECT]
 - `[PROJECT]`
   - project name (i.e. directory name)
 
-### COMMAND: `react`
+### Command: react
 
 ```
 chaka react [PROJECT] [-t vite|webpack]
