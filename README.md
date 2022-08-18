@@ -2,6 +2,7 @@
 
 [![npm](https://img.shields.io/badge/chaka-555?style=flat-square&logo=npm)](https://www.npmjs.com/package/chaka)
 ![npm](https://img.shields.io/npm/v/chaka?style=flat-square)
+[![npm](https://img.shields.io/badge/documents-555?style=flat-square&logo=netlify)](https://chakafire.netlify.app/)
 
 This command provides for creating a *React.js* or *Next.js* project template.
 
