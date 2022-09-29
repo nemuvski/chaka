@@ -16,20 +16,28 @@ If you have any problems about the template, please create an issue in the repos
 
 ## 👀 Quick Overview
 
-### Case: *React.js*
+### Global installation
 
 ```bash
-npx chaka react my-app
+npm i -g chaka@latest
+```
+
+### `npx` command
+
+#### Case: *React.js*
+
+```bash
+npx chaka@latest react my-app
 cd my-app
 
 yarn install
 git init
 ```
 
-### Case: *Next.js*
+#### Case: *Next.js*
 
 ```bash
-npx chaka next my-app
+npx chaka@latest next my-app
 cd my-app
 
 yarn install
