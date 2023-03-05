@@ -3,11 +3,11 @@ import * as tmp from 'tmp-promise'
 import AdmZip from 'adm-zip'
 import { DirectoryResult } from 'tmp-promise'
 import { DownloaderHelper } from 'node-downloader-helper'
-import { File } from './constant'
-import cliUx from './utils/cli-ux'
-import { readFile, writeFile, copy, mkdir, existsSync, rm } from './utils/fs'
-import { jsonParse, jsonStringify } from './utils/json'
-import { decoBlue, decoGreen, decoUnderscore } from './utils/log-decoration'
+import { File } from '../constant'
+import cliUx from '../utils/cli-ux'
+import { readFile, writeFile, copy, mkdir, existsSync, rm } from '../utils/fs'
+import { jsonParse, jsonStringify } from '../utils/json'
+import { decoBlue, decoGreen, decoUnderscore } from '../utils/log-decoration'
 
 /**
  * package.jsonのオブジェクトの型
@@ -21,7 +21,7 @@ interface PackageJson {
 /**
  * TemplateGeneratorのコンストラクタの引数
  */
-interface GeneratorConstructorArgs {
+export interface GeneratorConstructorArgs {
   tmpDir: DirectoryResult
   project: string
   repositoryBranch?: string
@@ -30,12 +30,12 @@ interface GeneratorConstructorArgs {
 /**
  * TemplateGeneratorのbuildメソッドの引数
  */
-type GeneratorBuildArgs = Omit<GeneratorConstructorArgs, 'tmpDir'>
+export type GeneratorBuildArgs = Omit<GeneratorConstructorArgs, 'tmpDir'>
 
 /**
  * TemplateGeneratorの基底クラス
  */
-abstract class TemplateGenerator {
+export abstract class TemplateGenerator {
   abstract repositoryName: string
   abstract repositoryUrl: string
 
@@ -57,7 +57,7 @@ abstract class TemplateGenerator {
    * @param args generatorの作成に必要な引数
    * @returns Promise<T> TemplateGeneratorのインスタンス
    */
-  static async build<T = TemplateGenerator>(
+  static async build<T extends TemplateGenerator>(
     this: { new (args: GeneratorConstructorArgs): T },
     args: GeneratorBuildArgs
   ): Promise<T> {
@@ -70,7 +70,7 @@ abstract class TemplateGenerator {
    *
    * @returns Promise<void>
    */
-  async run() {
+  async run(): Promise<void> {
     cliUx.action.start('Download template')
     await this.downloadTemplate()
     cliUx.action.stop(decoGreen('done'))
@@ -97,7 +97,7 @@ abstract class TemplateGenerator {
    *
    * @returns Promise<void>
    */
-  async postProcess() {
+  async postProcess(): Promise<void> {
     if (existsSync(this.getTempZipFilePath())) {
       await rm(this.getTempZipFilePath())
     }
@@ -114,7 +114,7 @@ abstract class TemplateGenerator {
    *
    * @returns Promise<void>
    */
-  async errorProcess() {
+  async errorProcess(): Promise<void> {
     if (existsSync(this.getProjectPath())) {
       await rm(this.getProjectPath(), { recursive: true, force: true })
     }
@@ -126,20 +126,18 @@ abstract class TemplateGenerator {
    * @returns void
    * @protected
    */
-  protected sayFarewell() {
+  protected sayFarewell(): void {
     cliUx.log()
     cliUx.log(`Created project in ${decoGreen(this.getProjectPath())}`)
     cliUx.log()
     cliUx.log('Now run:')
-    cliUx.log()
     cliUx.log(`    cd ${decoBlue(this.project)}`)
-    cliUx.log()
     cliUx.log()
     cliUx.log(`  ${decoUnderscore('Install dependencies using your fav package manager')}`)
     cliUx.log()
     cliUx.log('    yarn install')
     cliUx.log('    npm install')
-    cliUx.log()
+    cliUx.log('    pnpm install')
     cliUx.log()
     cliUx.log('Have fun coding 🔥')
     cliUx.log()
@@ -181,7 +179,7 @@ abstract class TemplateGenerator {
    * @returns Promise<void>
    * @protected
    */
-  protected async downloadTemplate() {
+  protected async downloadTemplate(): Promise<void> {
     const url = `${this.repositoryUrl}/archive/${this.repositoryBranch}${File.zipExtension}`
     const downloader = new DownloaderHelper(url, this.tmpDir.path, {
       retry: false,
@@ -198,7 +196,7 @@ abstract class TemplateGenerator {
    * @returns Promise<void>
    * @protected
    */
-  protected async extractZipFrom() {
+  protected async extractZipFrom(): Promise<void> {
     const zip = new AdmZip(this.getTempZipFilePath())
     zip.extractAllTo(this.tmpDir.path)
 
@@ -209,7 +207,6 @@ abstract class TemplateGenerator {
       File.copyExcludedFiles.map((filename) => path.join(this.getUnzippedDirectoryPath(), filename))
     )
     await copy(this.getUnzippedDirectoryPath(), this.getProjectPath(), {
-      recursive: true,
       overwrite: false,
       filter: (src) => !copyExcludedFilePaths.has(src),
     })
@@ -222,7 +219,7 @@ abstract class TemplateGenerator {
    * @returns Promise<void>
    * @protected
    */
-  protected async changePackageJson(encoding: BufferEncoding = 'utf8') {
+  protected async changePackageJson(encoding: BufferEncoding = 'utf8'): Promise<void> {
     const packageJsonPath = this.getPackageJsonPath()
     const rawData = await readFile(packageJsonPath, { encoding })
     const jsonData = jsonParse<PackageJson>(rawData)
@@ -232,20 +229,4 @@ abstract class TemplateGenerator {
 
     await writeFile(packageJsonPath, jsonStringify<PackageJson>(jsonData), { encoding })
   }
-}
-
-/**
- * React.jsプロジェクトのテンプレートを生成する
- */
-export class ReactTemplateGenerator extends TemplateGenerator {
-  repositoryName = 'reactjs-boilerplate'
-  repositoryUrl = 'https://github.com/nemuvski/reactjs-boilerplate'
-}
-
-/**
- * Next.jsプロジェクトのテンプレートを生成する
- */
-export class NextTemplateGenerator extends TemplateGenerator {
-  repositoryName = 'nextjs-boilerplate'
-  repositoryUrl = 'https://github.com/nemuvski/nextjs-boilerplate'
 }

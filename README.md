@@ -76,13 +76,8 @@ chaka next [PROJECT]
 ### COMMAND: `react`
 
 ```
-chaka react [PROJECT] [-t vite|webpack]
+chaka react [PROJECT]
 ```
 
 - `[PROJECT]`
   - project name (i.e. directory name)
-- `[-t vite|webpack]`
-  - build tool name
-  - options: `vite|webpack`
-  - default: `vite`
-  

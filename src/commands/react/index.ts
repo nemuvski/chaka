@@ -1,7 +1,8 @@
-import { Command, Flags, Interfaces } from '@oclif/core'
-import { existsSync } from '../utils/fs'
-import { decoRed } from '../utils/log-decoration'
-import { ReactTemplateGenerator } from '../generator'
+import { Args, Command } from '@oclif/core'
+import { existsSync } from '../../utils/fs'
+import { decoRed } from '../../utils/log-decoration'
+import { ReactTemplateGenerator } from '../../generator/react'
+import { ArgInput } from '@oclif/core/lib/interfaces/parser'
 
 /**
  * reactコマンドの処理を定義する
@@ -9,36 +10,22 @@ import { ReactTemplateGenerator } from '../generator'
 export default class React extends Command {
   static description = 'Create a React.js project template'
 
-  static examples = ['$ chaka react my-app', '$ chaka react my-app -t vite', '$ chaka react my-app --tool=vite']
+  static examples = ['$ chaka react my-app']
 
-  static flags = {
-    tool: Flags.string({
-      char: 't',
-      description: 'build tool name',
-      options: ['vite', 'webpack'],
-      default: 'vite',
-      multiple: false,
-      required: false,
-    }),
-  }
-
-  static args: Interfaces.ArgInput = [
-    {
-      name: 'project',
+  static args: ArgInput = {
+    project: Args.string({
       description: 'project name (i.e. directory name)',
       required: true,
-    },
-  ]
+    }),
+  }
 
   async run(): Promise<void> {
     const {
       args: { project },
-      flags: { tool },
     } = await this.parse(React)
 
     const generator = await ReactTemplateGenerator.build({
       project,
-      repositoryBranch: tool,
     })
 
     if (existsSync(generator.getProjectPath())) {

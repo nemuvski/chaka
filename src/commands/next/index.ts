@@ -1,7 +1,8 @@
-import { Command, Interfaces } from '@oclif/core'
-import { existsSync } from '../utils/fs'
-import { decoRed } from '../utils/log-decoration'
-import { NextTemplateGenerator } from '../generator'
+import { Args, Command } from '@oclif/core'
+import { existsSync } from '../../utils/fs'
+import { decoRed } from '../../utils/log-decoration'
+import { NextTemplateGenerator } from '../../generator/next'
+import { ArgInput } from '@oclif/core/lib/interfaces/parser'
 
 /**
  * nextコマンドの処理を定義する
@@ -11,13 +12,12 @@ export default class Next extends Command {
 
   static examples = ['$ chaka next my-app']
 
-  static args: Interfaces.ArgInput = [
-    {
-      name: 'project',
+  static args: ArgInput = {
+    project: Args.string({
       description: 'project name (i.e. directory name)',
       required: true,
-    },
-  ]
+    }),
+  }
 
   async run(): Promise<void> {
     const {

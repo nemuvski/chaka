@@ -1,3 +1,3 @@
-import { CliUx } from '@oclif/core'
+import { ux } from '@oclif/core'
 
-export default CliUx.ux
+export default ux
