@@ -1,16 +1,16 @@
 import { Args, Command } from '@oclif/core'
 import { existsSync } from '../../utils/fs'
 import { decoRed } from '../../utils/log-decoration'
-import { NextTemplateGenerator } from '../../generator/next'
+import { GatsbyTemplateGenerator } from '../../generator/gatsby'
 import type { ArgInput } from '@oclif/core/lib/interfaces/parser'
 
 /**
- * nextコマンドの処理を定義する
+ * gatsbyコマンドの処理を定義する
  */
-export default class Next extends Command {
-  static description = 'Create a Next.js project template'
+export default class Gatsby extends Command {
+  static description = 'Create a Gatsby.js project template'
 
-  static examples = ['$ chaka next my-app']
+  static examples = ['$ chaka gatsby my-app']
 
   static args: ArgInput = {
     project: Args.string({
@@ -22,9 +22,9 @@ export default class Next extends Command {
   async run(): Promise<void> {
     const {
       args: { project },
-    } = await this.parse(Next)
+    } = await this.parse(Gatsby)
 
-    const generator = await NextTemplateGenerator.build({
+    const generator = await GatsbyTemplateGenerator.build({
       project,
     })
 

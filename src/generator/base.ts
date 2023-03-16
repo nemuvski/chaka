@@ -1,7 +1,7 @@
 import * as path from 'node:path'
 import * as tmp from 'tmp-promise'
 import AdmZip from 'adm-zip'
-import { DirectoryResult } from 'tmp-promise'
+import type { DirectoryResult } from 'tmp-promise'
 import { DownloaderHelper } from 'node-downloader-helper'
 import { File } from '../constant'
 import cliUx from '../utils/cli-ux'

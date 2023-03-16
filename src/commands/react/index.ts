@@ -2,7 +2,7 @@ import { Args, Command } from '@oclif/core'
 import { existsSync } from '../../utils/fs'
 import { decoRed } from '../../utils/log-decoration'
 import { ReactTemplateGenerator } from '../../generator/react'
-import { ArgInput } from '@oclif/core/lib/interfaces/parser'
+import type { ArgInput } from '@oclif/core/lib/interfaces/parser'
 
 /**
  * reactコマンドの処理を定義する
