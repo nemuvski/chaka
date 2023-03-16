@@ -41,7 +41,7 @@
     "postpack": "rimraf oclif.manifest.json"
   },
   "dependencies": {
-    "@oclif/core": "^2.6.2",
+    "@oclif/core": "^2.6.4",
     "@oclif/plugin-help": "^5.2.8",
     "adm-zip": "^0.5.10",
     "fs-extra": "^11.1.0",
