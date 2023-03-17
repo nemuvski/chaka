@@ -81,6 +81,12 @@
       },
       "next": {
         "description": "Create a Next.js project template"
+      },
+      "remix": {
+        "description": "Create a Remix.js project template"
+      },
+      "gatsby": {
+        "description": "Create a Gatsby.js project template"
       }
     }
   }
