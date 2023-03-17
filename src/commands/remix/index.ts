@@ -8,7 +8,7 @@ import type { ArgInput } from '@oclif/core/lib/interfaces/parser'
  * remixコマンドの処理を定義する
  */
 export default class Remix extends Command {
-  static description = 'Create a remix.js project template'
+  static description = 'Create a Remix.js project template'
 
   static examples = ['$ chaka remix my-app']
 
