@@ -1,11 +1,13 @@
-This command provides for creating a *React.js* or *Next.js* project template.
+A Node CLI that generates minimal project templates of modern web development.
 
-The following boilerplate is used to create a project.
+The following project template is used to create a project.
 
 - React.js: [nemuvski/reactjs-boilerplate](https://github.com/nemuvski/reactjs-boilerplate)
 - Next.js: [nemuvski/nextjs-boilerplate](https://github.com/nemuvski/nextjs-boilerplate)
+- Remix.js: [nemuvski/remixjs-boilerplate](https://github.com/nemuvski/remixjs-boilerplate)
+- Gatsby.js: [nemuvski/gatsbyjs-boilerplate](https://github.com/nemuvski/gatsbyjs-boilerplate)
 
-If you have any problems about the template, please create an issue in the repository.
+If you have any problems about project templates, please create an issue in the repository.
 
 
 ## Quick Overview
@@ -16,7 +18,7 @@ If you have any problems about the template, please create an issue in the repos
 npm i -g chaka@latest
 ```
 
-### `npx` command
+### npx command
 
 #### Case: React.js
 
@@ -24,7 +26,7 @@ npm i -g chaka@latest
 npx chaka@latest react my-app
 cd my-app
 
-yarn install
+npm install
 git init
 ```
 
@@ -34,10 +36,29 @@ git init
 npx chaka@latest next my-app
 cd my-app
 
-yarn install
+npm install
 git init
 ```
 
+#### Case: Remix.js
+
+```bash
+npx chaka@latest remix my-app
+cd my-app
+
+npm install
+git init
+```
+
+#### Case: Gatsby.js
+
+```bash
+npx chaka@latest gatsby my-app
+cd my-app
+
+npm install
+git init
+```
 
 ## Requirements
 
@@ -54,9 +75,20 @@ chaka [COMMAND]
 
 [COMMAND]
   help   Display help for chaka.
-  next   Create a Next.js project template
   react  Create a React.js project template
+  next   Create a Next.js project template
+  remix   Create a Remix.js project template
+  gatsby  Create a Gatsby.js project template
 ```
+
+### Command: react
+
+```
+chaka react [PROJECT]
+```
+
+- `[PROJECT]`
+  - project name (i.e. directory name)
 
 ### Command: next
 
@@ -67,10 +99,19 @@ chaka next [PROJECT]
 - `[PROJECT]`
   - project name (i.e. directory name)
 
-### Command: react
+### COMMAND: remix
 
 ```
-chaka react [PROJECT]
+chaka remix [PROJECT]
+```
+
+- `[PROJECT]`
+  - project name (i.e. directory name)
+
+### COMMAND: gatsby
+
+```
+chaka gatsby [PROJECT]
 ```
 
 - `[PROJECT]`
