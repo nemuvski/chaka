@@ -1,6 +1,6 @@
 {
   "name": "chaka",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "author": "K.Utsunomiya",
   "license": "MIT",
   "description": "A Node CLI that generates minimal project templates of modern web development.",
