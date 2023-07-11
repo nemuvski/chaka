@@ -6,6 +6,7 @@ The following project template is used to create a project.
 - Next.js: [nemuvski/nextjs-boilerplate](https://github.com/nemuvski/nextjs-boilerplate)
 - Remix.js: [nemuvski/remixjs-boilerplate](https://github.com/nemuvski/remixjs-boilerplate)
 - Gatsby.js: [nemuvski/gatsbyjs-boilerplate](https://github.com/nemuvski/gatsbyjs-boilerplate)
+- Svelte.js: [nemuvski/sveltejs-boilerplate](https://github.com/nemuvski/sveltejs-boilerplate)
 
 If you have any problems about project templates, please create an issue in the repository.
 
@@ -60,6 +61,16 @@ npm install
 git init
 ```
 
+#### Case: *Svelte.js*
+
+```bash
+npx chaka@latest svelte my-app
+cd my-app
+
+npm install
+git init
+```
+
 ## Requirements
 
 - `Node.js`
@@ -79,6 +90,7 @@ chaka [COMMAND]
   next   Create a Next.js project template
   remix   Create a Remix.js project template
   gatsby  Create a Gatsby.js project template
+  svelte  Create a Svelte.js project template
 ```
 
 ### COMMAND: react
@@ -112,6 +124,15 @@ chaka remix [PROJECT]
 
 ```
 chaka gatsby [PROJECT]
+```
+
+- `[PROJECT]`
+  - project name (i.e. directory name)
+
+### COMMAND: svelte
+
+```
+chaka svelte [PROJECT]
 ```
 
 - `[PROJECT]`
