@@ -85,9 +85,9 @@ It's simple. 🍰
 chaka [COMMAND]
 
 [COMMAND]
-  help   Display help for chaka.
-  react  Create a React.js project template
-  next   Create a Next.js project template
+  help    Display help for chaka.
+  react   Create a React.js project template
+  next    Create a Next.js project template
   remix   Create a Remix.js project template
   gatsby  Create a Gatsby.js project template
   svelte  Create a Svelte.js project template
