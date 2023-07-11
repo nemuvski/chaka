@@ -81,7 +81,7 @@ chaka [COMMAND]
   gatsby  Create a Gatsby.js project template
 ```
 
-### Command: react
+### COMMAND: react
 
 ```
 chaka react [PROJECT]
@@ -90,7 +90,7 @@ chaka react [PROJECT]
 - `[PROJECT]`
   - project name (i.e. directory name)
 
-### Command: next
+### COMMAND: next
 
 ```
 chaka next [PROJECT]
