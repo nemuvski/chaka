@@ -91,6 +91,9 @@
       },
       "gatsby": {
         "description": "Create a Gatsby.js project template"
+      },
+      "svelte": {
+        "description": "Create a Svelte.js project template"
       }
     }
   }
