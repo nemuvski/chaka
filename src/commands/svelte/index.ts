@@ -8,7 +8,7 @@ import type { ArgInput } from '@oclif/core/lib/interfaces/parser'
  * svelteコマンドの処理を定義する
  */
 export default class Svelte extends Command {
-  static description = 'Create a Svelte project template'
+  static description = 'Create a Svelte.js project template'
 
   static examples = ['$ chaka svelte my-app']
 
