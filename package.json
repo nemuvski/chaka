@@ -44,8 +44,8 @@
     "@oclif/core": "^2.6.4",
     "@oclif/plugin-help": "^5.2.8",
     "adm-zip": "^0.5.10",
-    "fs-extra": "^11.1.0",
-    "node-downloader-helper": "^2.1.6",
+    "fs-extra": "^11.1.1",
+    "node-downloader-helper": "^2.1.7",
     "tmp-promise": "^3.0.3"
   },
   "devDependencies": {
