@@ -4,15 +4,18 @@ on:
   push:
     tags-ignore:
       - '*'
+    branches: [main]
     paths-ignore:
-      - '**/*.md'
+      - '**.md'
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   testing:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 16, 18 ]
+        node: [16, 18]
     name: Testing on Node.js ${{ matrix.node }}
     steps:
       - uses: actions/checkout@v3
