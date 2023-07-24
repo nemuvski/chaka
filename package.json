@@ -37,7 +37,6 @@
     "lint": "eslint . --ext .ts",
     "typecheck": "tsc --noEmit",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "prebuild": "npm run format && npm run lint && npm run typecheck && npm run test",
     "build": "rimraf dist && tsc -b",
     "prepack": "npm run build && oclif manifest oclif.manifest.json",
     "postpack": "rimraf oclif.manifest.json"
